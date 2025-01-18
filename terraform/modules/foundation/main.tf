@@ -226,3 +226,13 @@ output "chat_layer_arn" {
   value       = aws_lambda_layer_version.chat_layer.arn
   description = "The ARN of the Chat Lambda layer"
 }
+
+output "chat_role_arn" {
+  value       = aws_iam_role.chat_role.arn
+  description = "IAM role for the main chat function"
+}
+
+output "message_stream_role" {
+  value       = aws_iam_role.message_stream_role.arn
+  description = "IAM role for the DynamoDb stream function function"
+}
