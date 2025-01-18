@@ -8,8 +8,8 @@ terraform {
 }
 
 provider "aws" {
-  region  = "ca-central-1"
-  profile = "personal"
+  region  = var.region
+  profile = var.profile
 }
 
 
@@ -23,7 +23,9 @@ module "rest" {
   depends_on = [
     module.foundation
   ]
-  chat_layer_arn = module.foundation.chat_layer_arn
-  chat_role_arn  = module.foundation.chat_role_arn
-  chat_db = var.chat_db
+  chat_db                  = var.chat_db
+  api_role                 = module.foundation.api_role
+  chat_authorizer_function = module.foundation.chat_authorizer_function
+  chat_layer_arn           = module.foundation.chat_layer_arn
+  chat_role_arn            = module.foundation.chat_role_arn
 }

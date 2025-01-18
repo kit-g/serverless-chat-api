@@ -1,7 +1,5 @@
 import json
 
-from chatlib.errors import NotFoundError, ContentError
-
 
 def _respond(body: dict, status=200) -> dict:
     return {

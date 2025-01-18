@@ -12,3 +12,14 @@ variable "chat_db" {
   type        = string
   description = "Chat DynamoDB table"
 }
+
+variable "chat_authorizer_function" {
+  type        = string
+  description = "Authorizer's function invoke URI"
+}
+
+variable "api_role" {
+  type        = string
+  description = "IAM role for API Gateway to call lambdas"
+
+}
