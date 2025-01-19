@@ -118,10 +118,17 @@ and represents the full CRUD on both `Room` and `Message` models
 ### Steps
 
 ```shell
+# before we begin, we'll make the library layer
+cd chatmodels
+chmod +x package.sh
+./package.sh
+
 # all Terraform config is there
-cd terraform
+cd ../terraform
 # starts the project
 terraform init
+# creates our environment, see below
+touch terraform.tfvars
 # lists all planned changes in dry-run
 terraform plan
 # deploys in main.tf recursively
@@ -133,6 +140,8 @@ terraform apply
 File at `terraform/terraform.tfvars` may contain the following:
 
 ```shell
+# our reusable library
+chat_lib_path               = "../chatmodels/chat-lib-0-0-1.zip"
 # your AWS region of choice
 region                      = "ca-central-1"
 # AWS CLI profile on local machine
