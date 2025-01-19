@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "5.54.1"
     }
+    archive = {
+      source  = "hashicorp/archive"
+      version = "2.4.2"
+    }
   }
 }
 
@@ -209,10 +213,20 @@ resource "aws_iam_policy_attachment" "lambda-role-attachment" {
   ]
 }
 
+resource "archive_file" "layer" {
+  type        = "zip"
+  source_dir  = "${path.root}/../chatmodels"
+  output_path = "${path.root}/.terraform/temp/chatmodels.zip"
+  excludes = [
+    "*.egg-info",
+    "*.sh",
+  ]
+}
+
 resource "aws_lambda_layer_version" "chat_layer" {
   layer_name  = "chat-layer"
   description = "Chat lib layer"
-  filename    = "${path.root}/../chatmodels/chat-lib-0-0-1.zip"
+  filename    = "${path.root}/.terraform/temp/chatmodels.zip"
   compatible_runtimes = ["python3.12"] # Python 3.13 unsupported?
 }
 

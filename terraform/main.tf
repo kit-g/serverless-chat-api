@@ -23,9 +23,11 @@ module "rest" {
   depends_on = [
     module.foundation
   ]
-  chat_db                  = var.chat_db
-  api_role                 = module.foundation.api_role
-  chat_authorizer_function = module.foundation.chat_authorizer_function
-  chat_layer_arn           = module.foundation.chat_layer_arn
-  chat_role_arn            = module.foundation.chat_role_arn
+  chat_db                     = var.chat_db
+  api_role                    = module.foundation.api_role
+  chat_authorizer_function    = module.foundation.chat_authorizer_function
+  chat_layer_arn              = module.foundation.chat_layer_arn
+  chat_role_arn               = module.foundation.chat_role_arn
+  api_gateway_ssl_certificate = var.api_gateway_ssl_certificate
+  custom_domain_name          = var.custom_domain_name
 }

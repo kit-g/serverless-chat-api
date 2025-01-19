@@ -10,6 +10,16 @@ variable "chat_db" {
 }
 
 variable "profile" {
-  type = string
+  type        = string
   description = "AWS profile, usually 'default'"
+}
+
+variable "api_gateway_ssl_certificate" {
+  type        = string
+  description = "Optional AWS ACM certificate ARN, in case custom DNS name is provided"
+}
+
+variable "custom_domain_name" {
+  type        = string
+  description = "Optional DNS name to attach to the API Gateway"
 }

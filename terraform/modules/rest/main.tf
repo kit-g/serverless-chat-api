@@ -529,19 +529,16 @@ resource "aws_api_gateway_stage" "api" {
   stage_name    = "api"
 }
 
+resource "aws_api_gateway_domain_name" "this" {
+  count           = var.custom_domain_name != "" ? 1 : 0
+  domain_name     = var.custom_domain_name
+  certificate_arn = var.api_gateway_ssl_certificate
+  security_policy = "TLS_1_2"
+}
 
-#
-#  ChatRestApiCustomDomainName:
-#    Type: AWS::ApiGateway::DomainName
-#    Properties:
-#      CertificateArn: !FindInMap [ Environment, !Ref Environment, ChatApiSslCertificate ]
-#      DomainName: !FindInMap [ Environment, !Ref Environment, ChatApiDomainName ]
-#      SecurityPolicy: TLS_1_2
-#
-#  ChatRestApiPathMapping:
-#    Type: AWS::ApiGateway::BasePathMapping
-#    Properties:
-#      DomainName: !Ref ChatRestApiCustomDomainName
-#      RestApiId: !Ref ChatRestApi
-#      Stage: !Ref RestApiStage
-#
+resource "aws_api_gateway_base_path_mapping" "mapping" {
+  count           = var.custom_domain_name != "" ? 1 : 0
+  domain_name = var.custom_domain_name
+  api_id      = aws_api_gateway_rest_api.chat.id
+  stage_name  = aws_api_gateway_stage.api.stage_name
+}

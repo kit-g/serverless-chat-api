@@ -21,5 +21,14 @@ variable "chat_authorizer_function" {
 variable "api_role" {
   type        = string
   description = "IAM role for API Gateway to call lambdas"
+}
 
+variable "api_gateway_ssl_certificate" {
+  type        = string
+  description = "Optional AWS ACM certificate ARN, in case custom DNS name is provided"
+}
+
+variable "custom_domain_name" {
+  type        = string
+  description = "Optional DNS name to attach to the API Gateway"
 }
