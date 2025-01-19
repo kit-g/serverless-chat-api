@@ -518,8 +518,14 @@ resource "aws_api_gateway_deployment" "main" {
     create_before_destroy = true
   }
   depends_on = [
-    aws_api_gateway_integration_response.delete_room,
-    aws_api_gateway_integration_response.edit_room,
+    aws_api_gateway_integration_response.delete_message_success,
+    aws_api_gateway_integration_response.delete_message_not_found,
+    aws_api_gateway_integration.edit_message,
+    aws_api_gateway_integration.send_message,
+    aws_api_gateway_integration.get_messages,
+    aws_api_gateway_integration.delete_message,
+    aws_api_gateway_integration.delete_room,
+    aws_api_gateway_integration.edit_room,
   ]
 }
 

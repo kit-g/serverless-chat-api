@@ -23,3 +23,8 @@ variable "custom_domain_name" {
   type        = string
   description = "Optional DNS name to attach to the API Gateway"
 }
+
+variable "chat_lib_path" {
+  type        = string
+  description = "Local relative (to terraform root) path to where chatlib package is zipped"
+}

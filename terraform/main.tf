@@ -14,8 +14,9 @@ provider "aws" {
 
 
 module "foundation" {
-  source  = "./modules/foundation"
-  chat_db = var.chat_db
+  source        = "./modules/foundation"
+  chat_db       = var.chat_db
+  chat_lib_path = var.chat_lib_path
 }
 
 module "rest" {

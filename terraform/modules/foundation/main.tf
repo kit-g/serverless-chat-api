@@ -213,20 +213,10 @@ resource "aws_iam_policy_attachment" "lambda-role-attachment" {
   ]
 }
 
-resource "archive_file" "layer" {
-  type        = "zip"
-  source_dir  = "${path.root}/../chatmodels"
-  output_path = "${path.root}/.terraform/temp/chatmodels.zip"
-  excludes = [
-    "*.egg-info",
-    "*.sh",
-  ]
-}
-
 resource "aws_lambda_layer_version" "chat_layer" {
   layer_name  = "chat-layer"
   description = "Chat lib layer"
-  filename    = "${path.root}/.terraform/temp/chatmodels.zip"
+  filename    = "${path.root}/${var.chat_lib_path}"
   compatible_runtimes = ["python3.12"] # Python 3.13 unsupported?
 }
 
